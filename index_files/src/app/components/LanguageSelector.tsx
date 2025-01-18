@@ -1,31 +1,37 @@
-import { Box, MenuContent, MenuItem, MenuRoot, MenuTrigger, Text } from "@chakra-ui/react"
-import { LANGUAGE_VERSIONS } from "../constants/pro-languages"
+import { Box, Text } from "@chakra-ui/react";
+import {
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectRoot,
+  SelectTrigger,
+  SelectValueText,
+} from "@/components/ui/select";
 
+import { language_keys } from "../constants/pro-languages";
 
-
-const LanguageSelector = ({language,onSelect}) => {
-
-    const languages = Object.entries(LANGUAGE_VERSIONS);
-
-    return (
-        <Box>
-            <Text mb={2} fontSize='lg' ></Text>
-            <MenuRoot>
-                <MenuTrigger />
-                <MenuContent>
-                    {languages.map(([language, version]) => (
-                        <MenuItem key={language} value="..." >{language}
-                        &nbsp;
-                        <Text as="span" color="gray.500" fontSize="sm">
-                            {version}
-                        </Text>
-                        </MenuItem>
-                    ))}
-                    <MenuItem value="..." />
-                </MenuContent>
-            </MenuRoot>
-        </Box>
-    )
+interface LanguageSelectorProps {
+  language: string;
+  onSelect: (language: string) => void;
 }
 
-export default LanguageSelector
+const LanguageSelector = ({ language, onSelect }: LanguageSelectorProps) => {
+  return (
+    <Box className="flex gap-2 items-center">
+      <SelectRoot collection={language_keys} width="7rem">
+        <SelectTrigger>
+          <SelectValueText placeholder="Language" />
+        </SelectTrigger>
+        <SelectContent>
+          {language_keys.items.map((language) => (
+            <SelectItem item={language} key={language.value}>
+              {language.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </SelectRoot>
+    </Box>
+  );
+};
+
+export default LanguageSelector;
