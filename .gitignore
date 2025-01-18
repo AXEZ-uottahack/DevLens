@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 # node modules
 */node_modules/
-=======
-# node
-*/node_modules/
->>>>>>> origin/gemini_integration
+
+# nextJS
+*/.next/
+
