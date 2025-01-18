@@ -45,12 +45,13 @@ export default function Home() {
       className="flex flex-col w-full bg-black"
     >
       <Navbar language={language} onSelect={setLanguage} />
-
+      <div className='flex flex-row'>
       <div className="w-1/2">
         <Editor language={language} />
       </div>
         <DiagramBox classes={TEST_DATA.classes} associations={TEST_DATA.associations}/>
       <div className="w-1/2">
+      </div>
       </div>
     </Box>
   );
