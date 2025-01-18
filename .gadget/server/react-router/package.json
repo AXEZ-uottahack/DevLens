@@ -1,4 +1,0 @@
-{
-  "main": "../dist/react-router/index.js",
-  "types": "../types/react-router/index.d.ts"
-}

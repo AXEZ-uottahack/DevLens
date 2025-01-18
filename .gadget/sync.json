@@ -1,9 +1,0 @@
-{
-  "application": "devlens",
-  "environment": "development",
-  "environments": {
-    "development": {
-      "filesVersion": "12"
-    }
-  }
-}
