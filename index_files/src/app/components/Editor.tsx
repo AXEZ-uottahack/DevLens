@@ -1,5 +1,8 @@
 "use client";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 594e0dc162b92e2eac036921cd0d2410176b54be
 import React, { useState, useRef } from "react";
 import { Editor } from "@monaco-editor/react";
 import { Box } from "@chakra-ui/react";
@@ -20,9 +23,14 @@ const CodeEditor: React.FC = () => {
   };
 
   return (
+<<<<<<< HEAD
     <Box className="flex flex-col w-6/12">
       <div id="editor-nav" className="flex flex-row flex-row-reverse ">
         <>{console.log(language)}</>
+=======
+    <Box className="flex flex-col">
+      <div id="editor-nav" className="self-end">
+>>>>>>> 594e0dc162b92e2eac036921cd0d2410176b54be
         <LanguageSelector language={language} onSelect={onSelect} />
       </div>
       <Editor
