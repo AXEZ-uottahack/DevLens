@@ -2,6 +2,7 @@
   "name": "code-editor",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -16,6 +17,8 @@
     "@monaco-editor/react": "^4.6.0",
     "gojs": "^3.0.18",
     "gojs-react": "^1.1.2",
+    "@emotion/styled": "^11.14.0",
+    "framer-motion": "^11.18.1",
     "monaco": "^1.201704190613.0",
     "monaco-editor": "^0.52.2",
     "monaco-editor-webpack-plugin": "^7.1.0",
@@ -38,6 +41,5 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  },
-  "type": "module"
+  }
 }

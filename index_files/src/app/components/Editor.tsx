@@ -1,30 +1,25 @@
-"use client"
-import React, { useState, useRef} from 'react';
-import { Editor } from '@monaco-editor/react';
-import { Box } from '@chakra-ui/react';
-import LanguageSelector from './LanguageSelector';
+"use client";
+import React, { useState, useRef } from "react";
+import { Editor } from "@monaco-editor/react";
+import { Box } from "@chakra-ui/react";
+import LanguageSelector from "./LanguageSelector";
 
-const CodeEditor: React.FC = () => {
-    const editorRef = useRef(0)
-    const [value, setValue] = useState<string | undefined>('')
-    const [language, setLanguage] = useState<string>("Select a Language")
+interface EditorProps {
+  language: string
+}
 
-    const onMount = (editor: any) => {
-        editorRef.current = editor;
-        editor.focus();
-    }
+const CodeEditor: React.FC<EditorProps> = ({language} : EditorProps) => {
+  const editorRef = useRef(null);
+  const [value, setValue] = useState<string | undefined>("");
 
-    const onSelect = (language: string) => {
-        setLanguage(language);
-    };
+  const onMount = (editor: any) => {
+    editorRef.current = editor;
+    editor.focus();
+  };
+
 
   return (
-    <Box className="flex flex-col w-6/12">
-      <div id="editor-nav" className='flex flex-row flex-row-reverse'>
-        
-          <LanguageSelector language={language} onSelect={onSelect}/>
-        
-      </div>
+    <div className="flex flex-col">
       <Editor
         height="90vh" // Editor height
         width="50vw"
@@ -37,10 +32,10 @@ const CodeEditor: React.FC = () => {
         onMount={onMount}
         value={value}
         onChange={(value) => {
-          setValue(value)
-        }}    
+          setValue(value);
+        }}
       />
-    </Box>
+    </div>
   );
 };
 
