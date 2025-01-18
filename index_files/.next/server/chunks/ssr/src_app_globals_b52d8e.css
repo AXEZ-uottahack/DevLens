@@ -347,10 +347,6 @@ img, video {
   border-radius: .25rem;
 }
 
-.border {
-  border-width: 1px;
-}
-
 .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -372,20 +368,6 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-}
-
-#root {
-  height: 100vh;
-  width: 100vw;
-}
-
-.canvas {
-  width: 100%;
-  height: 100%;
-}
-
-.joint-paper {
-  border: 1px solid #a0a0a0;
 }
 
 /*# sourceMappingURL=src_app_globals_b52d8e.css.map*/

@@ -10,15 +10,15 @@ const TEST_DATA = {
     {
       name: "A",
       attributes: [
-        {type: "int", modifier: "-"},
-        {type: "int", modifier: "-"},
-        {type: "B[]", modifier: "-"} 
+        {type: "int", modifier: "-", name: "x"},
+        {type: "int", modifier: "-", name: "y"},
+        {type: "B[]", modifier: "-", name: "ptr"} 
       ]
     },
     {
       name: "B",
       attributes: [
-        {type: "A", modifier: "-"}
+        {type: "A", modifier: "-", name: "A"}
       ]
     }
   ],
@@ -35,10 +35,9 @@ const TEST_DATA = {
 
 export default function Home() {
   return (
-    
     <div>
       <h1>Browser Code Editor</h1>
-      {/* <Editor /> */}
+      <Editor />
       <DiagramBox classes={TEST_DATA.classes} associations={TEST_DATA.associations}/>
     </div>
   );
