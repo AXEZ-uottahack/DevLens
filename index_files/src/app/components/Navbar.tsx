@@ -2,12 +2,7 @@ import React from "react";
 import Logo from "./Logo";
 import LanguageSelector from "./LanguageSelector";
 import { ColorModeButton, useColorMode } from "@/components/ui/color-mode";
-<<<<<<< HEAD
 import { Button } from "@/components/ui/button";
-=======
-import { Switch } from "@/components/ui/switch";
-import { Box, Text } from "@chakra-ui/react";
->>>>>>> 8987107f2884bdd2db68af52fc9f0e2b1f697922
 
 interface NavbarProps {
   language: string; // The current programming language
@@ -27,14 +22,8 @@ const Navbar: React.FC<NavbarProps> = ({ language, onSelect }) => {
         <LanguageSelector language={language} onSelect={onSelect} />
       </div>
       <div className="flex flex-row gap-2">
-<<<<<<< HEAD
-        <Button>Analyze </Button>
-        <ColorModeButton/>
-        
-=======
-        <Text className="pt-1">{isDark ? "Dark Mode" : "Light Mode"}</Text>
+        <Button className="pb-1">Analyze </Button>
         <ColorModeButton />
->>>>>>> 8987107f2884bdd2db68af52fc9f0e2b1f697922
       </div>
     </div>
   );
