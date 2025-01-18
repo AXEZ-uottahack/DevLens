@@ -1,3 +1,4 @@
+import { ColorModeProvider } from "@/components/ui/color-mode";
 import { ThemeProvider } from "next-themes";
 interface appProps {
   Component: any;
@@ -10,7 +11,7 @@ interface appProps {
 function MyApp({ Component, pageProps }: appProps) {
   return (
     <ThemeProvider>
-      <Component {...pageProps} />
+      <ColorModeProvider><Component {...pageProps} /></ColorModeProvider>
     </ThemeProvider>
   );
 }

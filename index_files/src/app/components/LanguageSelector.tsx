@@ -19,10 +19,10 @@ const LanguageSelector = ({language,onSelect}: LanguageSelectorProps) => {
     const languages = Object.entries(LANGUAGE_VERSIONS);
 
     return (
-        <Box className="flex gap-1">
+        <div className="flex gap-1 " >
             <Text mb={2} fontSize='lg'>Language: </Text>
-            <MenuRoot>
-            <MenuTrigger>
+            <MenuRoot >
+            <MenuTrigger px={4} py={1}>
                 <Text className="flex mb-2"cursor="pointer" paddingBottom="5" px={4} py={1} border="1px solid" borderColor="gray.300" borderRadius="md" fontSize='md'>
                     {language}
                     
@@ -41,7 +41,7 @@ const LanguageSelector = ({language,onSelect}: LanguageSelectorProps) => {
                     
                 </MenuContent>
             </MenuRoot>
-        </Box>
+        </div>
     )
 }
 
