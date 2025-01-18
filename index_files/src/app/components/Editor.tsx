@@ -7,7 +7,7 @@ import LanguageSelector from './LanguageSelector';
 const CodeEditor: React.FC = () => {
     const editorRef = useRef(0)
     const [value, setValue] = useState<string | undefined>('')
-    const [language, setLanguage] = useState('')
+    const [language, setLanguage] = useState("javascript")
 
     const onMount = (editor: any) => {
         editorRef.current = editor;
@@ -20,10 +20,10 @@ const CodeEditor: React.FC = () => {
 
   return (
     <Box>
-        <LanguageSelector language={language} onSelect={onSelect}/>
+    <LanguageSelector language={language} onSelect={onSelect}/>
     <Editor
       height="90vh" // Editor height
-      defaultLanguage="python" // Default language
+      language={language} // Default language
       defaultValue="// Start typing your code here..."
       theme="vs-dark" // Editor theme ('vs-dark', 'light', etc.)
       onMount={onMount}
