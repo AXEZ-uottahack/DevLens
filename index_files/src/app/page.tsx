@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 
 import Editor from './components/Editor'
 import DiagramBox from './components/DiagramBox';
+import { generate_documentation } from '../backend/gemini-fast';
 
 const TEST_DATA = {
   classes: [

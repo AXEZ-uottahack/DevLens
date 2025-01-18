@@ -89,7 +89,7 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({classes, associations}: DiagramB
     }
   });
 
-  return <div className="graph-container" ref={divGraph} id="divGraph" />;
+  return <div style={{width: '50vw', height: '90vh'}} className="graph-container" ref={divGraph} id="divGraph" />;
 };
 
 export default DiagramBox;
