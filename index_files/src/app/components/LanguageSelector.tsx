@@ -1,37 +1,48 @@
-import { Box, Text } from "@chakra-ui/react";
+import {Box, Text} from "@chakra-ui/react"
+import { TiArrowSortedDown } from "react-icons/ti";
 import {
-  SelectContent,
-  SelectItem,
-  SelectLabel,
-  SelectRoot,
-  SelectTrigger,
-  SelectValueText,
-} from "@/components/ui/select";
+    MenuContent,
+    MenuItem,
+    MenuRoot,
+    MenuTrigger,
+} from "@/components/ui/menu"
 
-import { language_keys } from "../constants/pro-languages";
+import { LANGUAGE_VERSIONS } from "../constants/pro-languages"
 
 interface LanguageSelectorProps {
-  language: string;
-  onSelect: (language: string) => void;
+    language: string;
+    onSelect: (language: string) => void;
 }
 
-const LanguageSelector = ({ language, onSelect }: LanguageSelectorProps) => {
-  return (
-    <Box className="flex gap-2 items-center">
-      <SelectRoot collection={language_keys} width="7rem">
-        <SelectTrigger>
-          <SelectValueText placeholder="Language" />
-        </SelectTrigger>
-        <SelectContent>
-          {language_keys.items.map((language) => (
-            <SelectItem item={language} key={language.value}>
-              {language.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </SelectRoot>
-    </Box>
-  );
-};
+const LanguageSelector = ({language,onSelect}: LanguageSelectorProps) => {
 
-export default LanguageSelector;
+    const languages = Object.entries(LANGUAGE_VERSIONS);
+
+    return (
+        <Box className="flex gap-1">
+            <Text mb={2} fontSize='lg'>Language: </Text>
+            <MenuRoot>
+            <MenuTrigger>
+                <Text className="flex mb-2"cursor="pointer" paddingBottom="5" px={4} py={1} border="1px solid" borderColor="gray.300" borderRadius="md" fontSize='md'>
+                    {language}
+                    
+                </Text>
+            </MenuTrigger>
+
+                <MenuContent>
+                {languages.map(([language, version]) => (
+                        <MenuItem key={language} value="..." onClick={() => onSelect(language)}>{language}
+                        &nbsp;
+                        <Text as="span" color="gray.500" fontSize="sm">
+                            {version}
+                        </Text>
+                        </MenuItem>
+                    ))}
+                    
+                </MenuContent>
+            </MenuRoot>
+        </Box>
+    )
+}
+
+export default LanguageSelector
