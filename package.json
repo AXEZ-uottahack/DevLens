@@ -1,5 +1,45 @@
 {
+  "name": "code-editor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
-    "next-themes": "^0.4.4"
+    "@chakra-ui/react": "^3.4.0",
+    "@emotion/react": "^11.14.0",
+    "@joint/core": "^4.1.2",
+    "@maxgraph/core": "^0.14.0",
+    "@monaco-editor/react": "^4.6.0",
+    "gojs": "^3.0.18",
+    "gojs-react": "^1.1.2",
+    "@emotion/styled": "^11.14.0",
+    "framer-motion": "^11.18.1",
+    "monaco": "^1.201704190613.0",
+    "monaco-editor": "^0.52.2",
+    "monaco-editor-webpack-plugin": "^7.1.0",
+    "next": "15.1.5",
+    "next-themes": "^0.4.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.4.0",
+    "react-responsive": "^10.0.0",
+    "@google/generative-ai": "^0.21.0",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.5",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
