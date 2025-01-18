@@ -363,24 +363,12 @@ img, video {
   width: 50%;
 }
 
-.w-6\/12 {
-  width: 50%;
-}
-
 .w-fit {
   width: fit-content;
 }
 
 .w-full {
   width: 100%;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
-.flex-row-reverse {
-  flex-direction: row-reverse;
 }
 
 .flex-col {
