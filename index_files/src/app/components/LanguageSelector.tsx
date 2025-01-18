@@ -1,46 +1,37 @@
-import {Box, Text} from "@chakra-ui/react"
+import { Box, Text } from "@chakra-ui/react";
 import {
-    MenuContent,
-    MenuItem,
-    MenuRoot,
-    MenuTrigger,
-} from "@/components/ui/menu"
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectRoot,
+  SelectTrigger,
+  SelectValueText,
+} from "@/components/ui/select";
 
-import { LANGUAGE_VERSIONS } from "../constants/pro-languages"
+import { language_keys } from "../constants/pro-languages";
 
 interface LanguageSelectorProps {
-    language: string;
-    onSelect: (language: string) => void;
+  language: string;
+  onSelect: (language: string) => void;
 }
 
-const LanguageSelector = ({language,onSelect}: LanguageSelectorProps) => {
+const LanguageSelector = ({ language, onSelect }: LanguageSelectorProps) => {
+  return (
+    <Box className="flex gap-2 items-center">
+      <SelectRoot collection={language_keys} width="7rem">
+        <SelectTrigger>
+          <SelectValueText placeholder="Language" />
+        </SelectTrigger>
+        <SelectContent>
+          {language_keys.items.map((language) => (
+            <SelectItem item={language} key={language.value}>
+              {language.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </SelectRoot>
+    </Box>
+  );
+};
 
-    const languages = Object.entries(LANGUAGE_VERSIONS);
-
-    return (
-        <Box>
-            <Text mb={2} fontSize='lg' ></Text>
-            <MenuRoot>
-            <MenuTrigger>
-                <Text cursor="pointer" px={2} py={1} border="1px solid" borderColor="gray.300" borderRadius="md">
-                    {language || "Choose a language"}
-                </Text>
-            </MenuTrigger>
-
-                <MenuContent>
-                {languages.map(([language, version]) => (
-                        <MenuItem key={language} value="..." onClick={() => onSelect(language)}>{language}
-                        &nbsp;
-                        <Text as="span" color="gray.500" fontSize="sm">
-                            {version}
-                        </Text>
-                        </MenuItem>
-                    ))}
-                    
-                </MenuContent>
-            </MenuRoot>
-        </Box>
-    )
-}
-
-export default LanguageSelector
+export default LanguageSelector;

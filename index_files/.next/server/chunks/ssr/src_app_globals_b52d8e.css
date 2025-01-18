@@ -339,6 +339,10 @@ img, video {
   position: absolute;
 }
 
+.flex {
+  display: flex;
+}
+
 .inline-flex {
   display: inline-flex;
 }
@@ -347,20 +351,32 @@ img, video {
   display: none;
 }
 
-.border {
-  border-width: 1px;
+.w-6\/12 {
+  width: 50%;
 }
 
-.p-5 {
-  padding: 1.25rem;
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: .5rem;
 }
 
 .p-2 {
   padding: .5rem;
-}
-
-.p-3 {
-  padding: .75rem;
 }
 
 .antialiased {
