@@ -3,7 +3,7 @@
   "environment": "development",
   "environments": {
     "development": {
-      "filesVersion": "11"
+      "filesVersion": "12"
     }
   }
 }

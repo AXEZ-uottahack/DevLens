@@ -1,0 +1,4 @@
+{
+  "main": "../dist/remix/index.js",
+  "types": "../types/remix/index.d.ts"
+}
