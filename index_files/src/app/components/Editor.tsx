@@ -23,8 +23,12 @@ const CodeEditor: React.FC = () => {
     <LanguageSelector language={language} onSelect={onSelect}/>
     <Editor
       height="90vh" // Editor height
+      width="50vw"
       language={language} // Default language
       defaultValue="// Start typing your code here..."
+      options={{
+        minimap: { enabled: false }, // Disable minimap here
+      }}
       theme="vs-dark" // Editor theme ('vs-dark', 'light', etc.)
       onMount={onMount}
       value={value}
