@@ -47,7 +47,7 @@ async function generate_documentation(func, p_lang, code) {
 // Export the run function for external access
 export { generate_documentation };
 
-// Run the function if this script is executed directly
-if (import.meta.url === new URL(import.meta.url).href) {
-    generate_documentation("Documentation", "Python", "print('hello world!')"); // Example call
-}
+// // Run the function if this script is executed directly
+// if (import.meta.url === new URL(import.meta.url).href) {
+//     // generate_documentation("Documentation", "Python", "print('hello world!')"); // Example call
+// }
