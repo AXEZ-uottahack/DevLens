@@ -22,6 +22,7 @@ interface NavbarProps {
   onSelect: (language: string) => void; // Callback to update the selected language
   currentMode: modes;
   setCurrentMode: (mode: modes) => void;
+  onAnalyzeClick: () => void; // callback for analyze button
 }
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -29,6 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({
   onSelect,
   currentMode,
   setCurrentMode,
+  onAnalyzeClick,
 }) => {
   const { theme, toggleTheme } = useTheme();
   const textColor = theme === "dark" ? "white" : "black";
@@ -104,6 +106,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 ? "border-white text-white hover:bg-white hover:text-black"
                 : "border-black text-black hover:bg-black hover:text-white"
             }`}
+            onClick={onAnalyzeClick}
           >
             Analyze
           </button>
