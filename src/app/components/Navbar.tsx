@@ -22,7 +22,10 @@ const Navbar: React.FC<NavbarProps> = ({ language, onSelect }) => {
         <LanguageSelector language={language} onSelect={onSelect} />
       </div>
       <div className="flex flex-row gap-2">
-        <Button className="pb-1">Analyze </Button>
+      <button className="border border-white text-white px-6 py-2 rounded-md hover:bg-white hover:text-black transition-all">
+        Analyze
+      </button>
+
         <ColorModeButton />
       </div>
     </div>
