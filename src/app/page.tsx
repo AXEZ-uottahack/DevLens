@@ -6,6 +6,7 @@ import { generate_documentation, UML_MODE, DOC_MODE } from '../backend/gemini-fa
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import { Box } from "@chakra-ui/react";
+import { useTheme } from "./context/ThemeContext";
 
 const extractOnBrackets = (jsonString: string) => {
   let startIndex = 0;
@@ -56,6 +57,7 @@ const processAnalyze = async (requestType: string, requestData: string | undefin
 }
 
 export default function Home() {
+  const { theme, toggleTheme } = useTheme();
   // State to manage the selected programming language
   const [language, setLanguage] = useState<string>("javascript");
   const [code, setCode] = useState<string | undefined>("// Start typing your code here...");
@@ -67,8 +69,8 @@ export default function Home() {
 
   return (
     <Box
-      bg={{ base: "white", _dark: "black" }}
-      className="flex flex-col w-full bg-black"
+      bg={theme === "dark" ? "black" : "white"}
+      className="flex flex-col w-full bg-black overscroll-none"
     >
       <Navbar language={language} onSelect={setLanguage} onAnalyzeClick={() => {
         processAnalyze(actionType, code, language).then((result) => {

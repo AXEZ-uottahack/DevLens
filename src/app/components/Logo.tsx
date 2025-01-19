@@ -8,20 +8,20 @@ interface LogoProps {
     | "text-3l"
     | "text-4xl"
     | "text-5xl";
-  theme: "Dark" | "Light";
+  theme: "light" | "dark";
 }
 
 export default function Logo({ size, theme }: LogoProps) {
   let containerDiv =
     size +
     " w-fit m-1 p-1 flex" +
-    (theme === "Dark"
+    (theme === "dark"
       ? " border-solid border-2 border-white"
       : "border-solid border-2 border-black");
   let devSpan =
-    theme === "Dark" ? "bg-white text-black" : "bg-black text-white";
+    theme === "dark" ? "bg-white text-black" : "bg-black text-white";
   let lenSpan =
-    theme === "Dark" ? "bg-black text-white" : "bg-white text-black";
+    theme === "dark" ? "bg-black text-white" : "bg-white text-black";
 
   return (
     <div className={containerDiv}>

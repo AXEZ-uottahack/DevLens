@@ -3,6 +3,11 @@ import Logo from "./Logo";
 import LanguageSelector from "./LanguageSelector";
 import { ColorModeButton, useColorMode } from "@/components/ui/color-mode";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "../context/ThemeContext";
+import { LuMoon, LuSun } from "react-icons/lu";
+import BedtimeIcon from "@mui/icons-material/Bedtime";
+import { IconButton } from "@chakra-ui/react";
+import SvgIcon from "@mui/icons-material/Bedtime";
 
 interface NavbarProps {
   language: string; // The current programming language
@@ -11,11 +16,10 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ language, onSelect, onAnalyzeClick}) => {
-  const { colorMode, toggleColorMode } = useColorMode(); // Hook for light/dark mode
-  const isDark = colorMode === "dark";
+  const { theme, toggleTheme } = useTheme();
   return (
     <div className="flex flex-row items-center justify-between p-3 text-white w-full">
-      <Logo size="text-2xl" theme="Dark" />
+      <Logo size="text-2xl" theme={theme} />
       <div
         id="editor-nav"
         className="absolute right-1/2  flex content-center text-center"
@@ -23,8 +27,31 @@ const Navbar: React.FC<NavbarProps> = ({ language, onSelect, onAnalyzeClick}) =>
         <LanguageSelector language={language} onSelect={onSelect} />
       </div>
       <div className="flex flex-row gap-2">
-        <Button className="pb-1" onClick={onAnalyzeClick}>Analyze </Button>
-        <ColorModeButton />
+        <button
+          className={`border px-6 py-2 rounded-md transition-all ${
+            theme === "dark"
+              ? "border-white text-white hover:bg-white hover:text-black"
+              : "border-black text-black hover:bg-black hover:text-white"
+          }`}
+          onClick={onAnalyzeClick}
+        >
+          Analyze
+        </button>
+        <IconButton
+          onClick={toggleTheme}
+          variant="ghost"
+          aria-label="Toggle color mode"
+          size="sm"
+          css={{
+            _icon: {
+              width: "5",
+              height: "5",
+              color: `${theme === "dark" ? "white" : "black"}`,
+            },
+          }}
+        >
+          {theme === "dark" ? <LuMoon /> : <LuSun />}
+        </IconButton>
       </div>
     </div>
   );
