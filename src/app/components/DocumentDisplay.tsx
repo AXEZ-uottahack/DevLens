@@ -96,20 +96,8 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
                   }}
                   {...props}
                 />
-              ) : (
-                <pre
-                  style={{
-                    backgroundColor: theme === "dark" ? "#333" : "#f4f4f4",
-                    color: theme === "dark" ? "#f8f8f2" : "#000",
-                    fontFamily: "Courier New, monospace",
-                    padding: "1em",
-                    borderRadius: "6px",
-                    overflow: "auto",
-                  }}
-                  {...props}
-                />
-              );
-            }
+              ) : null;
+            },
           }}
         >
           {markdown}
