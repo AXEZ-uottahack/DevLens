@@ -125,7 +125,8 @@ export default function Home() {
         }}
       />
       <div className="flex flex-row">
-        <div className="w-1/2">
+        
+       <div className="w-1/2">
           <Editor
             language={language}
             onType={(value: string | undefined) => {
@@ -142,7 +143,7 @@ export default function Home() {
           "self-center " + (theme === "dark" ? "text-white" : "text-black")
         }
       >
-        ©copyright 2025 all rights reserved
+        ©copyright 2025 all rights reserved 
       </footer>
     </Box>
   );

@@ -16,6 +16,7 @@ import {
   MenuTrigger,
 } from "@/components/ui/menu";
 import { modes } from "../page";
+import { motion } from "framer-motion";
 
 interface NavbarProps {
   language: string; // The current programming language
@@ -53,28 +54,29 @@ const Navbar: React.FC<NavbarProps> = ({
             Mode:{" "}
           </Text>
           <MenuRoot>
-            <MenuTrigger>
-              <Text
+            <MenuTrigger asChild>
+              <Button
                 cursor="pointer"
                 px={2}
-                py={1}
+                py={0.5}
                 border="1px solid"
                 borderColor={borderColor}
                 fontSize="md"
                 color={textColor}
                 className={
                   theme === "dark"
-                    ? "border-white hover:bg-white hover:text-black"
-                    : "border-black hover:bg-black hover:text-white"
+                    ? "border-white rounded-lg hover:bg-white hover:text-black"
+                    : "border-black rounded-lg hover:bg-black hover:text-white"
                 }
               >
                 {currentMode}
-              </Text>
+              </Button>
             </MenuTrigger>
             <MenuContent>
               {Object.values(modes).map((mode) => {
                 return (
                   <MenuItem
+                  
                     key={mode}
                     value={"..."}
                     onClick={() => {
@@ -83,7 +85,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     style={{
                       padding: "8px 16px",
                       cursor: "pointer",
-                      backgroundColor: "transparent", // Default
+                      backgroundColor: "transparent radius-lg", // Default
                     }}
                     onMouseEnter={(e) =>
                       (e.currentTarget.style.backgroundColor = "#f0f0f0")
@@ -110,21 +112,24 @@ const Navbar: React.FC<NavbarProps> = ({
           >
             Analyze
           </button>
-          <IconButton
-            onClick={toggleTheme}
-            variant="ghost"
-            aria-label="Toggle color mode"
-            size="sm"
-            css={{
-              _icon: {
-                width: "5",
-                height: "5",
-                color: `${theme === "dark" ? "white" : "black"}`,
-              },
-            }}
-          >
-            {theme === "dark" ? <LuMoon /> : <LuSun />}
-          </IconButton>
+          
+          { <IconButton
+  onClick={toggleTheme}
+  aria-label="Toggle color mode"
+  variant="ghost"
+  size="sm"
+  className="p-2 rounded-full transition-all duration-300 ease-in-out transform hover:scale-110"
+  css={{
+    _icon: {
+      width: "2em",
+      height: "1.5em",
+      color: theme === "dark" ? "white" : "black",
+      transition: "color 0.3s ease", // Smooth color transition
+    },
+  }}
+>
+  {theme === "dark" ? <LuMoon /> : <LuSun />}
+</IconButton> }
         </div>
       </div>
     </div>

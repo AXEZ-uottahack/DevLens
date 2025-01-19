@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useTheme } from "../context/ThemeContext";
-import { TiEject } from "react-icons/ti";
 
 type DocumentDisplayType = {
   markdown: string;
@@ -13,7 +12,7 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
   return (
     <div
       style={{
-        height: "86.2vh",
+        height: "84.8vh",
         overflowY: "auto",
         backgroundColor: bgColor,
         padding: "1em",

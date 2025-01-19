@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { Editor } from "@monaco-editor/react";
-import { Box } from "@chakra-ui/react";
-import LanguageSelector from "./LanguageSelector";
 import { useTheme } from "../context/ThemeContext";
 
 interface EditorProps {
@@ -24,11 +22,10 @@ const CodeEditor: React.FC<EditorProps> = ({
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <Editor
         className="p-5"
         height="90.3vh" // Editor height
-        width="50vw"
         language={language} // Default language
         defaultValue="// Start typing your code here..."
         options={{

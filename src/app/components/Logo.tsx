@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 interface LogoProps {
   size:
     | "text-sm"
@@ -12,21 +14,59 @@ interface LogoProps {
 }
 
 export default function Logo({ size, theme }: LogoProps) {
-  let containerDiv =
+  const containerDiv =
     size +
-    " w-fit m-1 p-1 flex" +
+    " w-fit m-1 p-1 flex items-center rounded-lg transition-all duration-300" +
     (theme === "dark"
-      ? " border-solid border-2 border-white"
-      : " border-solid border-2 border-black");
-  let devSpan =
-    theme === "dark" ? "bg-white text-black" : "bg-black text-white";
-  let lenSpan =
-    theme === "dark" ? "bg-black text-white" : "bg-white text-black";
+      ? " border-solid border-2 border-white bg-black"
+      : " border-solid border-2 border-black bg-white");
+
+  const devSpan =
+    "px-2 py-1 font-bold transition-all duration-300 " +
+    (theme === "dark" ? "bg-white text-black" : "bg-black text-white");
+
+  const lenSpan =
+    "px-2 py-1 font-bold transition-all duration-300 " +
+    (theme === "dark" ? "bg-black text-white" : "bg-white text-black");
 
   return (
-    <div className={containerDiv}>
-      <span className={devSpan}>Dev</span>
-      <span className={lenSpan}>Lens</span>
-    </div>
+    <motion.div
+      layout
+      className={containerDiv}
+      initial={{ opacity: 0.5, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+      }}
+    >
+      <motion.span
+        layout
+        className={devSpan}
+        initial={{ x: -10 }}
+        animate={{ x: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 25,
+        }}
+      >
+        Dev
+      </motion.span>
+      <motion.span
+        layout
+        className={lenSpan}
+        initial={{ x: 10 }}
+        animate={{ x: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 25,
+        }}
+      >
+        Lens
+      </motion.span>
+    </motion.div>
   );
 }
