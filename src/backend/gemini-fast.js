@@ -14,6 +14,7 @@ Use the following structure:
 JSON
 { "classes": [ { "name": "<name>", "attributes": [{ "type": "<type>", "modifier": "<modifier>", "name": "<attribute name>" }] }, ... ], "associations": [ { "start": "<class name>", "end": "<class name>", "start_m": "<multiplicity at start>", "end_m": "<multiplicity at end>", "bidir": <boolean (true if bidirectional, false otherwise)> }, ... ] }
 Include class names, attributes (with types and modifiers), and associations with multiplicities.
+Use the symbols '-' for private modifier, '+' for public modifier, '#' for protected, and the empty string for default.
 If an association is bidirectional, represent it only once in the "associations" array.
 Ensure the JSON representation is accurate and adheres to the specified structure.`;}
 

@@ -81,10 +81,27 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
 
         // Add associations
         for (let i = 0; i < associations.length; i++) {
+          const sourceVertex = class_map.get(associations[i].start);
+          const endVertex = class_map.get(associations[i].end);
+          let bidir = associations[i].bidir;
+          if (bidir) {
+            endVertex?.edges.forEach((cell) => {
+              if (cell.getChildVertices().includes(sourceVertex)) {
+                endVertex.removeEdge(cell);
+              }
+            });
+          } else {
+            endVertex?.edges.forEach((cell) => {
+              if (cell.getChildVertices().includes(sourceVertex)) {
+                endVertex.removeEdge(cell);
+                bidir = true;
+              }
+            });
+          }
           graph.insertEdge({
             parent,
-            source: class_map.get(associations[i].start),
-            target: class_map.get(associations[i].end),
+            source: sourceVertex,
+            target: endVertex,
             value: `${associations[i].start_m}--${associations[i].end_m}`,
             style: {
               ...assoc_style,
