@@ -13,15 +13,10 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
   return (
     <div
       style={{
-        width: "49vw",
-        height: "85vh",
+        height: "86.2vh",
         overflowY: "auto",
         backgroundColor: bgColor,
-        marginLeft: "2em",
         padding: "1em",
-        marginBottom: "2em",
-        marginRight: "1.5em",
-        maxWidth: "49vw",
         scrollbarWidth: "thin",
       }}
       className="flex flex-col text-white"
