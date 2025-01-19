@@ -15,7 +15,7 @@ import {
   MenuRoot,
   MenuTrigger,
 } from "@/components/ui/menu";
-import { modes } from "../page";
+import { modes } from "../constants/const";
 
 interface NavbarProps {
   language: string; // The current programming language
