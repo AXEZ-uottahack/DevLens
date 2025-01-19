@@ -107,7 +107,7 @@ export default function Home() {
   return (
     <Box
       bg={theme === "dark" ? "black" : "white"}
-      className="flex flex-col h-full w-full bg-black overscroll-none"
+      className="flex flex-col h-full w-full bg-black overscroll-none max-w-full"
     >
       <Navbar
         language={language}
@@ -134,13 +134,13 @@ export default function Home() {
             }}
           />
         </div>
-        <div className="p-5">
+        <div className="w-1/2 p-5">
           <MarkdownOrDiagram requestType={currentMode} doc={doc} data={data} />
         </div>
       </div>
       <footer
         className={
-          "self-center " + (theme === "dark" ? "text-white" : "text-black")
+          "self-center p-3 " + (theme === "dark" ? "text-white" : "text-black")
         }
       >
         ©copyright 2025 all rights reserved 
