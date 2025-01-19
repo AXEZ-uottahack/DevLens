@@ -5,10 +5,11 @@ import { Box } from "@chakra-ui/react";
 import LanguageSelector from "./LanguageSelector";
 
 interface EditorProps {
-  language: string
+  language: string,
+  onType: (value: string | undefined) => void
 }
 
-const CodeEditor: React.FC<EditorProps> = ({language} : EditorProps) => {
+const CodeEditor: React.FC<EditorProps> = ({language, onType} : EditorProps) => {
   const editorRef = useRef(null);
   const [value, setValue] = useState<string | undefined>("");
 
@@ -33,6 +34,7 @@ const CodeEditor: React.FC<EditorProps> = ({language} : EditorProps) => {
         value={value}
         onChange={(value) => {
           setValue(value);
+          onType(value);
         }}
       />
     </div>

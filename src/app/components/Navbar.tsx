@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/button";
 interface NavbarProps {
   language: string; // The current programming language
   onSelect: (language: string) => void; // Callback to update the selected language
+  onAnalyzeClick: () => void;  // callback for analyze button
 }
 
-const Navbar: React.FC<NavbarProps> = ({ language, onSelect }) => {
+const Navbar: React.FC<NavbarProps> = ({ language, onSelect, onAnalyzeClick}) => {
   const { colorMode, toggleColorMode } = useColorMode(); // Hook for light/dark mode
   const isDark = colorMode === "dark";
   return (
@@ -22,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ language, onSelect }) => {
         <LanguageSelector language={language} onSelect={onSelect} />
       </div>
       <div className="flex flex-row gap-2">
-        <Button className="pb-1">Analyze </Button>
+        <Button className="pb-1" onClick={onAnalyzeClick}>Analyze </Button>
         <ColorModeButton />
       </div>
     </div>

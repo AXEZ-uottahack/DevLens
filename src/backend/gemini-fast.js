@@ -5,7 +5,8 @@ dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
-let p_lang; // Example value for the language variable
+const UML_MODE = "UML";
+const DOC_MODE = "DOC";
 
 const UML_Prompt = (p_lang, code) => {return `Analyze the following ${p_lang} code:
 ${code}
@@ -31,10 +32,9 @@ async function generate_documentation(func, p_lang, code) {
 
     let prompt; // Declare prompt outside the blocks
 
-    if (func == "Documentation") {
+    if (func == DOC_MODE) {
         prompt = DOC_Prompt(p_lang, code);
-    } else if (func == "UML") {
-        console.log("UML");
+    } else if (func == UML_MODE) {
         prompt = UML_Prompt(p_lang, code);
     }
 
@@ -42,12 +42,9 @@ async function generate_documentation(func, p_lang, code) {
     const response = await result.response;
     const text = response.text();
     console.log(text);
+
+    return text;
 }
 
 // Export the run function for external access
-export { generate_documentation };
-
-// Run the function if this script is executed directly
-if (import.meta.url === new URL(import.meta.url).href) {
-    generate_documentation("Documentation", "Python", "print('hello world!')"); // Example call
-}
+export { generate_documentation, UML_MODE, DOC_MODE };
