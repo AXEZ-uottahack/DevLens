@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import { Box } from "@chakra-ui/react";
 import { useTheme } from "./context/ThemeContext";
+import DocumentDisplay from './components/DocumentDisplay';
 
 const extractOnBrackets = (jsonString: string) => {
   let startIndex = 0;
@@ -72,6 +73,14 @@ const processAnalyze = async (
 export enum modes {
   DOC = "Documentation",
   GRAPH = "Graph",
+}
+
+const renderMarkdownOrDiagram = (requestType: string, doc: string, data: any) => {
+  if (requestType == DOC_MODE) {
+    return <DocumentDisplay markdown={doc} />
+  } else if (requestType == UML_MODE) {
+    return <DiagramBox classes={data.classes} associations={data.associations} />
+  }
 }
 
 export default function Home() {
