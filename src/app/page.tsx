@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <Box
       bg={{ base: "white", _dark: "black" }}
-      className="flex flex-col w-full bg-black"
+      className="flex flex-col w-full bg-black overscroll-none"
     >
       <Navbar language={language} onSelect={setLanguage} />
       <div className='flex flex-row'>
