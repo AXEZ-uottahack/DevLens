@@ -6,11 +6,14 @@ import LanguageSelector from "./LanguageSelector";
 import { useTheme } from "../context/ThemeContext";
 
 interface EditorProps {
-  language: string,
-  onType: (value: string | undefined) => void
+  language: string;
+  onType: (value: string | undefined) => void;
 }
 
-const CodeEditor: React.FC<EditorProps> = ({language, onType} : EditorProps) => {
+const CodeEditor: React.FC<EditorProps> = ({
+  language,
+  onType,
+}: EditorProps) => {
   const editorRef = useRef(null);
   const [value, setValue] = useState<string | undefined>("");
   const { theme, toggleTheme } = useTheme();
@@ -23,6 +26,7 @@ const CodeEditor: React.FC<EditorProps> = ({language, onType} : EditorProps) => 
   return (
     <div className="flex flex-col">
       <Editor
+        className="p-5"
         height="85vh" // Editor height
         width="50vw"
         language={language} // Default language

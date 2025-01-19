@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const textColor = theme === "dark" ? "white" : "black";
   const borderColor = theme === "dark" ? "gray.600" : "gray.300";
   return (
-    <div className="grid grid-cols-2 items-center gap-x-5">
+    <div className="grid grid-cols-2 items-center gap-x-5 p-2">
       <div className="grid grid-cols-2 items-center">
         <Logo size="text-2xl" theme={theme} />
         <div
