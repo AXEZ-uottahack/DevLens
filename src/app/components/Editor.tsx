@@ -22,9 +22,11 @@ const CodeEditor: React.FC<EditorProps> = ({
   };
 
   return (
-    <div className="flex flex-col shadow-lg">
+    <div className={"flex flex-col "}>
       <Editor
-        className="pt-5 pl-5"
+        className={
+          "pt-5 ml-5 shadow-lg " + (theme === "dark" ? "shadow-slate-800" : "")
+        }
         height="83vh" // Editor height
         width="50vw"
         language={language} // Default language

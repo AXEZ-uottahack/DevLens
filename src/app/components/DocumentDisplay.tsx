@@ -20,7 +20,10 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
         padding: "1em",
         scrollbarWidth: "thin",
       }}
-      className="flex flex-col text-white shadow-lg"
+      className={
+        "flex flex-col text-white shadow-lg " +
+        (theme === "dark" ? "shadow-slate-800" : "")
+      }
     >
       {markdown ? (
         <ReactMarkdown
