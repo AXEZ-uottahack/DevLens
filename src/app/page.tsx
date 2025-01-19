@@ -53,17 +53,15 @@ export default function Home() {
           } 
         })
       }}/>
-
-      <Navbar language={language} onSelect={setLanguage} />
       <div className='flex flex-row'>
-      <div className="w-1/2">
-        <Editor language={language} onType={(value: string | undefined) => {
-          setCode(value);
-        }}/>
-      </div>
-        <DiagramBox classes={data.classes} associations={data.associations}/>
-      <div className="w-1/2">
-      </div>
+        <div className="w-1/2">
+          <Editor language={language} onType={(value: string | undefined) => {
+            setCode(value);
+          }}/>
+        </div>
+        <div className="w-1/2">
+          <DiagramBox classes={data.classes} associations={data.associations}/>
+        </div>
       </div>
     </Box>
   );
