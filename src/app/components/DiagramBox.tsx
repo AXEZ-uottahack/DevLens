@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Cell, Graph, InternalEvent } from '@maxgraph/core';
+import { Cell, CircleLayout, FastOrganicLayout, Graph, InternalEvent } from '@maxgraph/core';
 import { useMediaQuery } from 'react-responsive'
 
 type DiagramBoxProps = {
@@ -49,6 +49,7 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({classes, associations}: DiagramB
   useEffect(() => {
     InternalEvent.disableContextMenu(divGraph.current);
     const graph = new Graph(divGraph.current);
+    const layout = new CircleLayout(graph);
     graph.setPanning(true);
     const parent = graph.getDefaultParent();
 
@@ -61,7 +62,6 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({classes, associations}: DiagramB
         const textValue = getClassText(classes[i].name, classes[i].attributes);
         const vertex = graph.insertVertex({
           parent,
-          position: [10, 10],
           size: [textValue[1].length * WIDTH_FACTOR, textValue.length * HEIGHT_FACTOR],
           value: textValue.join('\n'),
           style: class_style
@@ -82,6 +82,8 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({classes, associations}: DiagramB
         });
       }
     });
+
+    layout.execute(graph.getDefaultParent());
 
     return () => { 
       graph.destroy();

@@ -41,8 +41,10 @@ const tryProcessJSON = (jsonString: string) => {
 }
 
 const processAnalyze = async (requestType: string, requestData: string | undefined, language: string) => {
-  // const result = await generate_documentation(requestType, language, requestData);
-  const result = '```json{"classes": [{"name": "Hello World", "attributes": [], "associations": []}], "associations": []}```'
+  const result = await generate_documentation(requestType, language, requestData);
+  // const result = '```json{"classes": [{"name": "Hello World", "attributes": [], "associations": []}, \
+  // {"name": "Hello World2", "attributes": [], "associations": []}, {"name": "Hello World2", "attributes": [], "associations": []}], \
+  // "associations": [{"start": "Hello World", "end": "Hello World2", "start_m": "1", "end_m": "0..1", "bidir": true}]}```'
 
   if (requestType == UML_MODE) {
     return tryProcessJSON(result);
