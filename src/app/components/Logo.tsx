@@ -17,7 +17,7 @@ export default function Logo({ size, theme }: LogoProps) {
     " w-fit m-1 p-1 flex" +
     (theme === "dark"
       ? " border-solid border-2 border-white"
-      : "border-solid border-2 border-black");
+      : " border-solid border-2 border-black");
   let devSpan =
     theme === "dark" ? "bg-white text-black" : "bg-black text-white";
   let lenSpan =
