@@ -25,7 +25,7 @@ const LanguageSelector = ({ language, onSelect }: LanguageSelectorProps) => {
 
   return (
     <div className="flex text-center gap-2">
-      <Text color={textColor} mb={2} fontSize="lg">
+      <Text color={textColor} fontSize="lg">
         Language:{" "}
       </Text>
       <MenuRoot>
@@ -39,6 +39,11 @@ const LanguageSelector = ({ language, onSelect }: LanguageSelectorProps) => {
             borderRadius="md"
             fontSize="md"
             color={textColor}
+            className={
+              theme === "dark"
+                ? "border-white hover:bg-white hover:text-black"
+                : "border-black hover:bg-black hover:text-white"
+            }
           >
             {language}
           </Text>
