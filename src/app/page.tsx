@@ -4,14 +4,18 @@ import Editor from "./components/Editor";
 import DiagramBox from "./components/DiagramBox";
 import {
   generate_documentation,
-  UML_MODE,
-  DOC_MODE,
 } from "../backend/gemini-fast";
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import { Box } from "@chakra-ui/react";
 import { useTheme } from "./context/ThemeContext";
 import DocumentDisplay from './components/DocumentDisplay';
+
+type DocumentOrDiagramType = {
+  requestType: string, 
+  doc: string, 
+  data: any
+}
 
 const extractOnBrackets = (jsonString: string) => {
   let startIndex = 0;
@@ -75,11 +79,13 @@ export enum modes {
   GRAPH = "Graph",
 }
 
-const renderMarkdownOrDiagram = (requestType: string, doc: string, data: any) => {
-  if (requestType == DOC_MODE) {
+const MarkdownOrDiagram = ({requestType, doc, data}: DocumentOrDiagramType) => {
+  if (requestType == modes.DOC) {
     return <DocumentDisplay markdown={doc} />
-  } else if (requestType == UML_MODE) {
+  } else if (requestType == modes.GRAPH) {
     return <DiagramBox classes={data.classes} associations={data.associations} />
+  } else {
+    return <></>
   }
 }
 
@@ -123,7 +129,7 @@ export default function Home() {
             }}
           />
         </div>
-        <DiagramBox classes={data.classes} associations={data.associations} />
+        <MarkdownOrDiagram requestType={currentMode} doc={doc} data={data} />
       </div>
     </Box>
   );

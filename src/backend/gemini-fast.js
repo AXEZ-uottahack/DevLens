@@ -1,11 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { modes } from "@/app/page";
 
 const KEY = require('./key.json');
 
 const genAI = new GoogleGenerativeAI(KEY.API_KEY);
-
-const UML_MODE = "UML";
-const DOC_MODE = "DOC";
 
 const UML_Prompt = (p_lang, code) => {return `Analyze the following ${p_lang} code:
 ${code}
@@ -32,9 +30,9 @@ async function generate_documentation(func, p_lang, code) {
 
     let prompt; // Declare prompt outside the blocks
 
-    if (func == DOC_MODE) {
+    if (func == modes.DOC) {
         prompt = DOC_Prompt(p_lang, code);
-    } else if (func == UML_MODE) {
+    } else if (func == modes.GRAPH) {
         prompt = UML_Prompt(p_lang, code);
     }
 
@@ -47,4 +45,4 @@ async function generate_documentation(func, p_lang, code) {
 }
 
 // Export the run function for external access
-export { generate_documentation, UML_MODE, DOC_MODE };
+export { generate_documentation };
