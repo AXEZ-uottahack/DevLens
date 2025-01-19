@@ -34,17 +34,28 @@ const TEST_DATA = {
   ],
 };
 
+export enum modes {
+  DOC = "Documentation",
+  GRAPH = "Graph",
+}
+
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
   // State to manage the selected programming language
   const [language, setLanguage] = useState<string>("javascript");
+  const [currentMode, setCurrentMode] = useState(modes.DOC);
 
   return (
     <Box
       bg={theme === "dark" ? "black" : "white"}
       className="flex flex-col w-full bg-black overscroll-none"
     >
-      <Navbar language={language} onSelect={setLanguage} />
+      <Navbar
+        language={language}
+        onSelect={setLanguage}
+        currentMode={currentMode}
+        setCurrentMode={setCurrentMode}
+      />
       <div className="flex flex-row">
         <div className="w-1/2">
           <Editor language={language} />
