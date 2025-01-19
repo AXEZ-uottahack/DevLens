@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 interface LogoProps {
   size:
@@ -14,12 +15,13 @@ interface LogoProps {
 }
 
 export default function Logo({ size, theme }: LogoProps) {
+  const router = useRouter();
   const containerDiv =
     size +
-    " w-fit m-1 p-1 flex items-center rounded-lg transition-all duration-300" +
+    " w-fit m-1 p-1 flex items-center rounded-lg transition-all duration-300 cursor-pointer " +
     (theme === "dark"
-      ? " border-solid border-2 border-white bg-black"
-      : " border-solid border-2 border-black bg-white");
+      ? "border-solid border-2 border-white bg-black"
+      : "border-solid border-2 border-black bg-white");
 
   const devSpan =
     "px-2 py-1 font-bold transition-all duration-300 " +
@@ -40,6 +42,7 @@ export default function Logo({ size, theme }: LogoProps) {
         stiffness: 200,
         damping: 20,
       }}
+      onClick={() => router.push("/")}
     >
       <motion.span
         layout
@@ -52,7 +55,7 @@ export default function Logo({ size, theme }: LogoProps) {
           damping: 25,
         }}
       >
-        Dev
+        DEV
       </motion.span>
       <motion.span
         layout
@@ -65,7 +68,7 @@ export default function Logo({ size, theme }: LogoProps) {
           damping: 25,
         }}
       >
-        Lens
+        LENS
       </motion.span>
     </motion.div>
   );
