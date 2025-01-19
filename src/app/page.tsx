@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import { Box } from "@chakra-ui/react";
 import { useTheme } from "./context/ThemeContext";
+import DocumentDisplay from './components/DocumentDisplay';
 
 const extractOnBrackets = (jsonString: string) => {
   let startIndex = 0;
@@ -56,6 +57,14 @@ const processAnalyze = async (requestType: string, requestData: string | undefin
   return '';
 }
 
+const renderMarkdownOrDiagram = (requestType: string, doc: string, data: any) => {
+  if (requestType == DOC_MODE) {
+    return <DocumentDisplay markdown={doc}/>
+  } else if (requestType == UML_MODE) {
+    return <DiagramBox classes={data.classes} associations={data.associations}/>
+  }
+}
+
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
   // State to manage the selected programming language
@@ -81,8 +90,8 @@ export default function Home() {
           } 
         })
       }}/>
-      <div className='flex flex-row'>
-        <div className="w-1/2">
+      <div className='flex flex-row w-full'>
+        <div className="ml-4 relative overflow-hidden ">
           <Editor language={language} onType={(value: string | undefined) => {
             setCode(value);
           }}/>
