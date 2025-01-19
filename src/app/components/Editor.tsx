@@ -24,10 +24,10 @@ const CodeEditor: React.FC<EditorProps> = ({
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col shadow-lg">
       <Editor
-        className="p-5"
-        height="90.3vh" // Editor height
+        className="pt-5 pl-5"
+        height="83vh" // Editor height
         width="50vw"
         language={language} // Default language
         defaultValue="// Start typing your code here..."

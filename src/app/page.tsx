@@ -139,7 +139,7 @@ export default function Home() {
       </div>
       <footer
         className={
-          "self-center " + (theme === "dark" ? "text-white" : "text-black")
+          "self-center p-3 " + (theme === "dark" ? "text-white" : "text-black")
         }
       >
         ©copyright 2025 all rights reserved

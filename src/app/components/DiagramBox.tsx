@@ -20,8 +20,10 @@ const getClassText = (class_name: string, attrs: any[]) => {
     max_length = line.length > max_length ? line.length : max_length;
   }
 
-  return [lines[0]].concat([(lines.length > 1 ? '-' : ' ').repeat(max_length)]).concat(lines.slice(1));
-}
+  return [lines[0]]
+    .concat([(lines.length > 1 ? "-" : " ").repeat(max_length)])
+    .concat(lines.slice(1));
+};
 
 const DiagramBox: React.FC<DiagramBoxProps> = ({
   classes,
@@ -124,8 +126,8 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
 
   return (
     <div
-      style={{ width: "50vw", height: "90vh" }}
-      className="graph-container"
+      style={{ width: "50vw", height: "80vh" }}
+      className="graph-container shadow-lg"
       ref={divGraph}
       id="divGraph"
     />

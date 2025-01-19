@@ -13,7 +13,7 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
   return (
     <div
       style={{
-        height: "86.2vh",
+        height: "80vh",
         overflowY: "auto",
         backgroundColor: bgColor,
         padding: "1em",
@@ -22,7 +22,13 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
       className="flex flex-col text-white shadow-lg"
     >
       {markdown ? (
-        <ReactMarkdown>{markdown}</ReactMarkdown>
+        <ReactMarkdown
+          className={
+            "font-courier " + (theme === "dark" ? "text-white" : "text-black")
+          }
+        >
+          {markdown}
+        </ReactMarkdown>
       ) : (
         <p
           className={
