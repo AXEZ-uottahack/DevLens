@@ -48,6 +48,6 @@ async function generate_documentation(func, p_lang, code) {
 export { generate_documentation };
 
 // Run the function if this script is executed directly
-if (import.meta.url === new URL(import.meta.url).href) {
-    generate_documentation("Documentation", "Python", "print('hello world!')"); // Example call
-}
+// if (import.meta.url === new URL(import.meta.url).href) {
+//     generate_documentation("Documentation", "Python", "print('hello world!')"); // Example call
+// }

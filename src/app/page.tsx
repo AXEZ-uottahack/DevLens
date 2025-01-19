@@ -42,18 +42,19 @@ export default function Home() {
   return (
     <Box
       bg={theme === "dark" ? "black" : "white"}
-      className="flex flex-col w-full bg-black"
+      className="flex flex-col w-full bg-black overscroll-none"
     >
       <Navbar language={language} onSelect={setLanguage} />
-
-      <div className="w-1/2">
-        <Editor language={language} />
+      <div className="flex flex-row">
+        <div className="w-1/2">
+          <Editor language={language} />
+        </div>
+        <DiagramBox
+          classes={TEST_DATA.classes}
+          associations={TEST_DATA.associations}
+        />
+        <div className="w-1/2"></div>
       </div>
-      <DiagramBox
-        classes={TEST_DATA.classes}
-        associations={TEST_DATA.associations}
-      />
-      <div className="w-1/2"></div>
     </Box>
   );
 }

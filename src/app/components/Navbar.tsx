@@ -26,9 +26,15 @@ const Navbar: React.FC<NavbarProps> = ({ language, onSelect }) => {
         <LanguageSelector language={language} onSelect={onSelect} />
       </div>
       <div className="flex flex-row gap-2">
-        <Button className={theme === "dark" ? "text-white" : "text-black"}>
-          Analyze{" "}
-        </Button>
+        <button
+          className={`border px-6 py-2 rounded-md transition-all ${
+            theme === "dark"
+              ? "border-white text-white hover:bg-white hover:text-black"
+              : "border-black text-black hover:bg-black hover:text-white"
+          }`}
+        >
+          Analyze
+        </button>
         <IconButton
           onClick={toggleTheme}
           variant="ghost"
