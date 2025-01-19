@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/menu";
 
 import { LANGUAGE_VERSIONS } from "../constants/pro-languages";
+import { useTheme } from "../context/ThemeContext";
 
 interface LanguageSelectorProps {
   language: string;
@@ -16,24 +17,28 @@ interface LanguageSelectorProps {
 
 const LanguageSelector = ({ language, onSelect }: LanguageSelectorProps) => {
   const languages = Object.entries(LANGUAGE_VERSIONS);
+  const { theme, toggleTheme } = useTheme();
+
+  // Define colors based on the theme
+  const textColor = theme === "dark" ? "white" : "black";
+  const borderColor = theme === "dark" ? "gray.600" : "gray.300";
 
   return (
-    <div className="flex gap-1 text-center">
-      <Text className="pt-1" mb={2} fontSize="lg">
+    <div className="flex text-center gap-2">
+      <Text color={textColor} mb={2} fontSize="lg">
         Language:{" "}
       </Text>
       <MenuRoot>
-        <MenuTrigger px={4} py={1}>
+        <MenuTrigger>
           <Text
-            // className="flex mb-2"
             cursor="pointer"
-            // paddingBottom="5"
             px={4}
             py={1}
             border="1px solid"
-            borderColor="gray.300"
+            borderColor={borderColor}
             borderRadius="md"
             fontSize="md"
+            color={textColor}
           >
             {language}
           </Text>
@@ -45,6 +50,17 @@ const LanguageSelector = ({ language, onSelect }: LanguageSelectorProps) => {
               key={language}
               value="..."
               onClick={() => onSelect(language)}
+              style={{
+                padding: "8px 16px",
+                cursor: "pointer",
+                backgroundColor: "transparent", // Default
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#f0f0f0")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = "transparent")
+              }
             >
               {language}
               &nbsp;
