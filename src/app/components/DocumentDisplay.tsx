@@ -19,12 +19,16 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
         padding: "1em",
         scrollbarWidth: "thin",
       }}
-      className="flex flex-col text-white"
+      className="flex flex-col text-white shadow-lg"
     >
       {markdown ? (
         <ReactMarkdown>{markdown}</ReactMarkdown>
       ) : (
-        <p>
+        <p
+          className={
+            "font-courier " + (theme === "dark" ? "text-white" : "text-black")
+          }
+        >
           Write some code in the text editor on the left, and hit analyze!{" "}
           <br />
           <br />
