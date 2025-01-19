@@ -12,13 +12,17 @@
   "dependencies": {
     "@chakra-ui/react": "^3.4.0",
     "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@google/generative-ai": "^0.21.0",
     "@joint/core": "^4.1.2",
     "@maxgraph/core": "^0.14.0",
     "@monaco-editor/react": "^4.6.0",
+    "@mui/icons-material": "^6.4.0",
+    "@mui/material": "^6.4.0",
+    "dotenv": "^16.4.7",
+    "framer-motion": "^11.18.1",
     "gojs": "^3.0.18",
     "gojs-react": "^1.1.2",
-    "@emotion/styled": "^11.14.0",
-    "framer-motion": "^11.18.1",
     "monaco": "^1.201704190613.0",
     "monaco-editor": "^0.52.2",
     "monaco-editor-webpack-plugin": "^7.1.0",
@@ -27,9 +31,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
-    "react-responsive": "^10.0.0",
-    "@google/generative-ai": "^0.21.0",
-    "dotenv": "^16.4.7"
+    "react-responsive": "^10.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
