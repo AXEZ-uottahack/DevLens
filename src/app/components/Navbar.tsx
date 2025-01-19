@@ -12,9 +12,10 @@ import SvgIcon from "@mui/icons-material/Bedtime";
 interface NavbarProps {
   language: string; // The current programming language
   onSelect: (language: string) => void; // Callback to update the selected language
+  onAnalyzeClick: () => void;  // callback for analyze button
 }
 
-const Navbar: React.FC<NavbarProps> = ({ language, onSelect }) => {
+const Navbar: React.FC<NavbarProps> = ({ language, onSelect, onAnalyzeClick}) => {
   const { theme, toggleTheme } = useTheme();
   return (
     <div className="flex flex-row items-center justify-between p-3 text-white w-full">
@@ -32,6 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ language, onSelect }) => {
               ? "border-white text-white hover:bg-white hover:text-black"
               : "border-black text-black hover:bg-black hover:text-white"
           }`}
+          onClick={onAnalyzeClick}
         >
           Analyze
         </button>

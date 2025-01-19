@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Cell, Graph, InternalEvent } from "@maxgraph/core";
-import { useMediaQuery } from "react-responsive";
+import { Cell, CircleLayout, Graph, InternalEvent } from "@maxgraph/core";
 import { useTheme } from "../context/ThemeContext";
 
 type DiagramBoxProps = {
@@ -21,8 +20,8 @@ const getClassText = (class_name: string, attrs: any[]) => {
     max_length = line.length > max_length ? line.length : max_length;
   }
 
-  return [lines[0]].concat(["-".repeat(max_length)]).concat(lines.slice(1));
-};
+  return [lines[0]].concat([(lines.length > 1 ? '-' : ' ').repeat(max_length)]).concat(lines.slice(1));
+}
 
 const DiagramBox: React.FC<DiagramBoxProps> = ({
   classes,
@@ -31,67 +30,6 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
   const divGraph = useRef(null);
   const { theme, toggleTheme } = useTheme();
 
-  // const class_style = {
-  //   baseStyleNames: ["rounded"],
-  //   fillColor: theme === "dark" ? "#0a0a0a" : "#ffffff",
-  //   strokeColor: theme === "dark" ? "#ededed" : "#171717",
-  //   fontColor: theme === "dark" ? "#ededed" : "#171717",
-  // };
-
-  // const assoc_style = {
-  //   edgeStyle: "orthogonalEdgeStyle",
-  //   rounded: true,
-  //   strokeColor: theme === "dark" ? "#ededed" : "#171717",
-  // };
-
-  // useEffect(() => {
-  //   if (divGraph.current != null) {
-  //     InternalEvent.disableContextMenu(divGraph.current);
-  //     const graph = new Graph(divGraph.current);
-  //     graph.setPanning(true);
-  //     const parent = graph.getDefaultParent();
-
-  //     const class_map: Map<string, Cell> = new Map();
-
-  //     graph.batchUpdate(() => {
-  //       for (let i = 0; i < classes.length; i++) {
-  //         const textValue = getClassText(
-  //           classes[i].name,
-  //           classes[i].attributes
-  //         );
-  //         const vertex = graph.insertVertex({
-  //           parent,
-  //           position: [10, 10],
-  //           size: [
-  //             textValue[1].length * WIDTH_FACTOR,
-  //             textValue.length * HEIGHT_FACTOR,
-  //           ],
-  //           value: textValue.join("\n"),
-  //           style: class_style,
-  //         });
-  //         class_map.set(classes[i].name, vertex);
-  //       }
-
-  //       for (let i = 0; i < associations.length; i++) {
-  //         graph.insertEdge({
-  //           parent,
-  //           source: class_map.get(associations[i].start),
-  //           target: class_map.get(associations[i].end),
-  //           value: `${associations[i].start_m}--${associations[i].end_m}`,
-  //           style: {
-  //             ...assoc_style,
-  //             endArrow: associations[i].bidir ? "none" : "open",
-  //           },
-  //         });
-  //       }
-  //     });
-
-  //     return () => {
-  //       // graph.removeCells(cells);
-  //       divGraph.current = null;
-  //     };
-  //   }
-  // });
   const getClassStyle = () => ({
     baseStyleNames: ["rounded"],
     fillColor: theme === "dark" ? "#0a0a0a" : "#ffffff",
@@ -106,65 +44,64 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
   });
 
   useEffect(() => {
-    if (divGraph.current) {
-      InternalEvent.disableContextMenu(divGraph.current);
-      const graph = new Graph(divGraph.current);
-      graph.setPanning(true);
-      const parent = graph.getDefaultParent();
+    InternalEvent.disableContextMenu(divGraph.current);
+    const graph = new Graph(divGraph.current);
+    const layout = new CircleLayout(graph);
+    graph.setPanning(true);
+    const parent = graph.getDefaultParent();
 
-      const class_map: Map<string, Cell> = new Map();
+    const class_map: Map<string, Cell> = new Map();
 
-      const updateGraph = () => {
-        const class_style = getClassStyle();
-        const assoc_style = getAssocStyle();
+    const updateGraph = () => {
+      const class_style = getClassStyle();
+      const assoc_style = getAssocStyle();
 
-        // Clear the graph before redrawing
-        graph.removeCells(graph.getChildVertices(parent));
+      // Clear the graph before redrawing
+      graph.removeCells(graph.getChildVertices(parent));
 
-        graph.batchUpdate(() => {
-          // Add classes
-          for (let i = 0; i < classes.length; i++) {
-            const textValue = getClassText(
-              classes[i].name,
-              classes[i].attributes
-            );
-            const vertex = graph.insertVertex({
-              parent,
-              position: [10, 10],
-              size: [
-                textValue[1].length * WIDTH_FACTOR,
-                textValue.length * HEIGHT_FACTOR,
-              ],
-              value: textValue.join("\n"),
-              style: class_style,
-            });
-            class_map.set(classes[i].name, vertex);
-          }
+      graph.batchUpdate(() => {
+        // Add classes
+        for (let i = 0; i < classes.length; i++) {
+          const textValue = getClassText(
+            classes[i].name,
+            classes[i].attributes
+          );
+          const vertex = graph.insertVertex({
+            parent,
+            position: [10, 10],
+            size: [
+              textValue[1].length * WIDTH_FACTOR,
+              textValue.length * HEIGHT_FACTOR,
+            ],
+            value: textValue.join("\n"),
+            style: class_style,
+          });
+          class_map.set(classes[i].name, vertex);
+        }
 
-          // Add associations
-          for (let i = 0; i < associations.length; i++) {
-            graph.insertEdge({
-              parent,
-              source: class_map.get(associations[i].start),
-              target: class_map.get(associations[i].end),
-              value: `${associations[i].start_m}--${associations[i].end_m}`,
-              style: {
-                ...assoc_style,
-                endArrow: associations[i].bidir ? "none" : "open",
-              },
-            });
-          }
-        });
-      };
+        // Add associations
+        for (let i = 0; i < associations.length; i++) {
+          graph.insertEdge({
+            parent,
+            source: class_map.get(associations[i].start),
+            target: class_map.get(associations[i].end),
+            value: `${associations[i].start_m}--${associations[i].end_m}`,
+            style: {
+              ...assoc_style,
+              endArrow: associations[i].bidir ? "none" : "open",
+            },
+          });
+        }
+      });
+    };
 
-      // Initial render
-      updateGraph();
+    // Initial render
+    updateGraph();
 
-      // Re-run the update when the theme changes
-      return () => {
-        graph.destroy(); // Clean up the graph instance when the component unmounts
-      };
-    }
+    // Re-run the update when the theme changes
+    return () => {
+      graph.destroy(); // Clean up the graph instance when the component unmounts
+    };
   }, [classes, associations, theme]); // Run this effect whenever `classes`, `associations`, or `theme` changes.
 
   return (

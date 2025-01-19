@@ -6,10 +6,11 @@ import LanguageSelector from "./LanguageSelector";
 import { useTheme } from "../context/ThemeContext";
 
 interface EditorProps {
-  language: string;
+  language: string,
+  onType: (value: string | undefined) => void
 }
 
-const CodeEditor: React.FC<EditorProps> = ({ language }: EditorProps) => {
+const CodeEditor: React.FC<EditorProps> = ({language, onType} : EditorProps) => {
   const editorRef = useRef(null);
   const [value, setValue] = useState<string | undefined>("");
   const { theme, toggleTheme } = useTheme();
@@ -34,6 +35,7 @@ const CodeEditor: React.FC<EditorProps> = ({ language }: EditorProps) => {
         value={value}
         onChange={(value) => {
           setValue(value);
+          onType(value);
         }}
       />
     </div>
