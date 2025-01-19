@@ -1,9 +1,8 @@
-import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-dotenv.config();
+const KEY = require('./key.json');
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const genAI = new GoogleGenerativeAI(KEY.API_KEY);
 
 const UML_MODE = "UML";
 const DOC_MODE = "DOC";

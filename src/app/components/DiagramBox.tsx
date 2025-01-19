@@ -20,7 +20,7 @@ const getClassText = (class_name: string, attrs: any[]) => {
     max_length = line.length > max_length ? line.length : max_length;
   }
 
-  return [lines[0]].concat(['-'.repeat(max_length)]).concat(lines.slice(1));
+  return [lines[0]].concat([(lines.length > 1 ? '-' : ' ').repeat(max_length)]).concat(lines.slice(1));
 }
 
 const DiagramBox: React.FC<DiagramBoxProps> = ({classes, associations}: DiagramBoxProps) => {
@@ -47,45 +47,44 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({classes, associations}: DiagramB
   }
 
   useEffect(() => {
-    if (divGraph.current != null) {
-      InternalEvent.disableContextMenu(divGraph.current);
-      const graph = new Graph(divGraph.current);
-      graph.setPanning(true);
-      const parent = graph.getDefaultParent();
+    InternalEvent.disableContextMenu(divGraph.current);
+    const graph = new Graph(divGraph.current);
+    graph.setPanning(true);
+    const parent = graph.getDefaultParent();
 
-      const class_map: Map<string, Cell> = new Map();
+    const class_map: Map<string, Cell> = new Map();
 
-      graph.batchUpdate(() => {
-        for (let i = 0; i < classes.length; i++) {
-          const textValue = getClassText(classes[i].name, classes[i].attributes);
-          const vertex = graph.insertVertex({
-            parent,
-            position: [10, 10],
-            size: [textValue[1].length * WIDTH_FACTOR, textValue.length * HEIGHT_FACTOR],
-            value: textValue.join('\n'),
-            style: class_style
-          });
-          class_map.set(classes[i].name, vertex);
-        }
+    console.debug('here');
 
-        for (let i = 0; i < associations.length; i++) {
-          graph.insertEdge({
-            parent,
-            source: class_map.get(associations[i].start),
-            target: class_map.get(associations[i].end),
-            value: `${associations[i].start_m}--${associations[i].end_m}`,
-            style: {
-              ...assoc_style,
-              endArrow: associations[i].bidir ? 'none' : 'open'
-            }
-          });
-        }
-      });
-
-      return () => { 
-        // graph.removeCells(cells);
-        divGraph.current = null;
+    graph.batchUpdate(() => {
+      for (let i = 0; i < classes.length; i++) {
+        const textValue = getClassText(classes[i].name, classes[i].attributes);
+        const vertex = graph.insertVertex({
+          parent,
+          position: [10, 10],
+          size: [textValue[1].length * WIDTH_FACTOR, textValue.length * HEIGHT_FACTOR],
+          value: textValue.join('\n'),
+          style: class_style
+        });
+        class_map.set(classes[i].name, vertex);
       }
+
+      for (let i = 0; i < associations.length; i++) {
+        graph.insertEdge({
+          parent,
+          source: class_map.get(associations[i].start),
+          target: class_map.get(associations[i].end),
+          value: `${associations[i].start_m}--${associations[i].end_m}`,
+          style: {
+            ...assoc_style,
+            endArrow: associations[i].bidir ? 'none' : 'open'
+          }
+        });
+      }
+    });
+
+    return () => { 
+      graph.destroy();
     }
   });
 
