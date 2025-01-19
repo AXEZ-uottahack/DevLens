@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useTheme } from "../context/ThemeContext";
-import { TiEject } from "react-icons/ti";
 
 type DocumentDisplayType = {
   markdown: string;
