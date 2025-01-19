@@ -1,13 +1,8 @@
 "use client";
 
-import Editor from "./components/Editor";
-import DiagramBox from "./components/DiagramBox";
-import { generate_documentation } from "../backend/gemini-fast";
 import React, { useState } from "react";
-import Navbar from "./components/Navbar";
 import { Box, IconButton } from "@chakra-ui/react";
 import { useTheme } from "./context/ThemeContext";
-import DocumentDisplay from "./components/DocumentDisplay";
 import Logo from "./components/Logo";
 import { LuMoon, LuSun } from "react-icons/lu";
 
