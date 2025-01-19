@@ -97,6 +97,7 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
 
     // Initial render
     updateGraph();
+    layout.execute(graph.getDefaultParent());
 
     // Re-run the update when the theme changes
     return () => {
