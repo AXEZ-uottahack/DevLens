@@ -5,7 +5,7 @@ import DiagramBox from "../components/DiagramBox";
 import { generate_documentation } from "../../backend/gemini-fast";
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { Box } from "@chakra-ui/react";
+import { Box, Center, Spinner } from "@chakra-ui/react";
 import { useTheme } from "../context/ThemeContext";
 import DocumentDisplay from "../components/DocumentDisplay";
 import { modes } from "../constants/const";
@@ -15,6 +15,10 @@ type DocumentOrDiagramType = {
   doc: string;
   data: any;
 };
+
+type OptionalLoadingType = {
+  loading: boolean
+}
 
 const extractOnBrackets = (jsonString: string) => {
   let startIndex = 0;
@@ -89,6 +93,20 @@ const MarkdownOrDiagram = ({
   }
 };
 
+const OptionalLoading = ({loading}: OptionalLoadingType) => {
+  console.log(loading);
+  if (loading) {
+    return (
+    <Box pos="absolute" inset="0" bg="bg/80">
+      <Center h="full">
+        <span className="loading loading-dots loading-lg"></span>
+      </Center>
+    </Box> );
+  } else {
+    return <></>
+  }
+}
+
 export default function page() {
   const { theme, toggleTheme } = useTheme();
   // State to manage the selected programming language
@@ -100,46 +118,53 @@ export default function page() {
   const [currentMode, setCurrentMode] = useState(modes.DOC);
   const [doc, setDoc] = useState<string>("");
 
+  const [loading, setLoading] = useState(false);
+
   return (
-    <Box
-      bg={theme === "dark" ? "black" : "white"}
-      className="flex flex-col h-full w-full bg-black overscroll-none"
-    >
-      <Navbar
-        language={language}
-        onSelect={setLanguage}
-        currentMode={currentMode}
-        setCurrentMode={setCurrentMode}
-        onAnalyzeClick={() => {
-          processAnalyze(currentMode, code, language).then((result) => {
-            if (currentMode == modes.GRAPH) {
-              setData(result);
-            } else if (currentMode == modes.DOC) {
-              setDoc(result);
-            }
-          });
-        }}
-      />
-      <div className="flex flex-row">
-        <div className="w-1/2">
-          <Editor
-            language={language}
-            onType={(value: string | undefined) => {
-              setCode(value);
-            }}
-          />
-        </div>
-        <div className="w-1/2 p-5">
-          <MarkdownOrDiagram requestType={currentMode} doc={doc} data={data} />
-        </div>
-      </div>
-      <footer
-        className={
-          "self-center " + (theme === "dark" ? "text-white" : "text-black")
-        }
+    <>
+      <Box
+        bg={theme === "dark" ? "black" : "white"}
+        className="flex flex-col h-full w-full bg-black overscroll-none"
       >
-        ©copyright 2025 all rights reserved
-      </footer>
-    </Box>
+        <Navbar
+          language={language}
+          onSelect={setLanguage}
+          currentMode={currentMode}
+          setCurrentMode={setCurrentMode}
+          onAnalyzeClick={() => {
+            setLoading(true);
+            processAnalyze(currentMode, code, language).then((result) => {
+              setLoading(false);
+              if (currentMode == modes.GRAPH) {
+                setData(result);
+              } else if (currentMode == modes.DOC) {
+                setDoc(result);
+              }
+            });
+          }}
+        />
+        <div className="flex flex-row">
+          <div className="w-1/2">
+            <Editor
+              language={language}
+              onType={(value: string | undefined) => {
+                setCode(value);
+              }}
+            />
+          </div>
+          <div className="w-1/2 p-5">
+            <OptionalLoading loading={loading} />
+            <MarkdownOrDiagram requestType={currentMode} doc={doc} data={data} />
+          </div>
+        </div>
+        <footer
+          className={
+            "self-center " + (theme === "dark" ? "text-white" : "text-black")
+          }
+        >
+          ©copyright 2025 all rights reserved
+        </footer>
+      </Box>
+    </>
   );
 }
