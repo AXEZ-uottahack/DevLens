@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { Editor } from "@monaco-editor/react";
-import { Box } from "@chakra-ui/react";
-import LanguageSelector from "./LanguageSelector";
 import { useTheme } from "../context/ThemeContext";
 
 interface EditorProps {
