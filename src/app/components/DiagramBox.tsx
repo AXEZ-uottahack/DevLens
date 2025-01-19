@@ -48,7 +48,7 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
   useEffect(() => {
     InternalEvent.disableContextMenu(divGraph.current);
     const graph = new Graph(divGraph.current);
-    const layout = new CircleLayout(graph);
+    // const layout = new CircleLayout(graph);
     graph.setPanning(true);
     const parent = graph.getDefaultParent();
 
@@ -116,7 +116,7 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
 
     // Initial render
     updateGraph();
-    layout.execute(graph.getDefaultParent());
+    // layout.execute(graph.getDefaultParent());
 
     // Re-run the update when the theme changes
     return () => {
