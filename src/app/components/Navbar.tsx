@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/menu";
 import { modes } from "../constants/const";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface NavbarProps {
   language: string; // The current programming language
@@ -39,7 +40,9 @@ const Navbar: React.FC<NavbarProps> = ({
   return (
     <div className="grid grid-cols-2 items-center gap-x-5 p-2">
       <div className="grid grid-cols-2 items-center">
+        <Link href="/">
         <Logo size="text-2xl" theme={theme} />
+        </Link>
         <div
           id="editor-nav"
           className="flex justify-end content-center text-center"

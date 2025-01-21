@@ -46,9 +46,10 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
   });
 
   useEffect(() => {
-    InternalEvent.disableContextMenu(divGraph.current);
-    const graph = new Graph(divGraph.current);
-    // const layout = new CircleLayout(graph);
+    if (divGraph.current) {
+      InternalEvent.disableContextMenu(divGraph.current);
+      const graph = new Graph(divGraph.current);
+      // const layout = new CircleLayout(graph);
     graph.setPanning(true);
     const parent = graph.getDefaultParent();
 
@@ -86,19 +87,25 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
           const sourceVertex = class_map.get(associations[i].start);
           const endVertex = class_map.get(associations[i].end);
           let bidir = associations[i].bidir;
-          if (bidir) {
-            endVertex?.edges.forEach((cell) => {
+          if (sourceVertex && endVertex) {
+            // Handle the case where both vertices exist
+            endVertex.edges.forEach((cell) => {
               if (cell.getChildVertices().includes(sourceVertex)) {
                 endVertex.removeEdge(cell);
               }
             });
-          } else {
-            endVertex?.edges.forEach((cell) => {
+          } else if (endVertex && sourceVertex) {
+            // Extra check for partial validity to ensure TypeScript compliance
+            endVertex.edges.forEach((cell) => {
               if (cell.getChildVertices().includes(sourceVertex)) {
                 endVertex.removeEdge(cell);
                 bidir = true;
               }
             });
+          } else {
+            console.error(
+              `Skipping association: Source or Target vertex is undefined (Source: ${sourceVertex}, Target: ${endVertex})`
+            );
           }
           graph.insertEdge({
             parent,
@@ -122,6 +129,8 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
     return () => {
       graph.destroy(); // Clean up the graph instance when the component unmounts
     };
+    }
+    
   }, [classes, associations, theme]); // Run this effect whenever `classes`, `associations`, or `theme` changes.
 
   return (

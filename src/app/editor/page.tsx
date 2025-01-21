@@ -1,14 +1,16 @@
 "use client";
 
-import Editor from "../components/Editor";
-import DiagramBox from "../components/DiagramBox";
 import { generate_documentation } from "../../backend/gemini-fast";
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
 import { Box, Center, Spinner } from "@chakra-ui/react";
 import { useTheme } from "../context/ThemeContext";
-import DocumentDisplay from "../components/DocumentDisplay";
 import { modes } from "../constants/const";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("../components/Editor"), { ssr: false });
+const DiagramBox = dynamic(() => import("../components/DiagramBox"), { ssr: false });
+const DocumentDisplay = dynamic(() => import("../components/DocumentDisplay"), { ssr: false });
+const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false });
 
 type DocumentOrDiagramType = {
   requestType: string;

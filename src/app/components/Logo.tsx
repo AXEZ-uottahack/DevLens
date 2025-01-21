@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 
 interface LogoProps {
   size:
@@ -15,7 +14,6 @@ interface LogoProps {
 }
 
 export default function Logo({ size, theme }: LogoProps) {
-  const router = useRouter();
   const containerDiv =
     size +
     " w-fit m-1 p-1 flex items-center rounded-lg transition-all duration-300 cursor-pointer " +
@@ -42,7 +40,6 @@ export default function Logo({ size, theme }: LogoProps) {
         stiffness: 200,
         damping: 20,
       }}
-      onClick={() => router.push("/")}
     >
       <motion.span
         layout

@@ -87,8 +87,9 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
               />
             ),
             // Render inline code with specific styles
-            code: ({ node, inline, className, ...props }) => {
-              return inline ? (
+            code: ({ node, className, ...props }) => {
+              const isInline = !className;
+              return isInline ? (
                 <code
                   style={{
                     backgroundColor: theme === "dark" ? "#333" : "#f4f4f4",

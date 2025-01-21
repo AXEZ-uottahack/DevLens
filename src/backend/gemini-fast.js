@@ -1,9 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { modes } from "@/app/constants/const";
+import dotenv from 'dotenv'
 
-const KEY = require("./key.json");
+dotenv.config()
 
-const genAI = new GoogleGenerativeAI(KEY.API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 const UML_Prompt = (p_lang, code) => {
   return `Analyze the following ${p_lang} code:

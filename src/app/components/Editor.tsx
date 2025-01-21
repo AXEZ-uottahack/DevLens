@@ -13,7 +13,41 @@ const CodeEditor: React.FC<EditorProps> = ({
   onType,
 }: EditorProps) => {
   const editorRef = useRef(null);
-  const [value, setValue] = useState<string | undefined>("");
+  const [value, setValue] = useState<string | undefined>(`class DiagramBox {
+
+    private DiagramData data;
+
+    public DiagramBox(DiagramData data) {
+        this.data = data;
+        drawDiagram(data);
+    }
+
+    public void drawDiagram(data) {}
+    public void clearContents() {}
+
+    public boolean onUpdate(data) {
+        drawDiagram(data);
+    }
+}
+
+class DiagramData {
+    private List<ClassData> classes;
+    private List<AssociationData> associations;
+}
+
+class ClassData {
+    private String name;
+    private List<AttributeData> attrs;
+}
+
+class AssociationData {
+    private String start;
+    private String end;
+    private int startMult;
+    private int endMult;
+    private bool bidir;
+}
+`);
   const { theme, toggleTheme } = useTheme();
 
   const onMount = (editor: any) => {
