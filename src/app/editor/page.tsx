@@ -2,25 +2,50 @@
 
 import { generate_documentation } from "../../backend/gemini-fast";
 import React, { useState } from "react";
-import { Box, Center, Spinner } from "@chakra-ui/react";
+import { Box, Center } from "@chakra-ui/react";
 import { useTheme } from "../context/ThemeContext";
 import { modes } from "../constants/const";
 import dynamic from "next/dynamic";
 
 const Editor = dynamic(() => import("../components/Editor"), { ssr: false });
-const DiagramBox = dynamic(() => import("../components/DiagramBox"), { ssr: false });
-const DocumentDisplay = dynamic(() => import("../components/DocumentDisplay"), { ssr: false });
+const DiagramBox = dynamic(() => import("../components/DiagramBox"), {
+  ssr: false,
+});
+const DocumentDisplay = dynamic(() => import("../components/DocumentDisplay"), {
+  ssr: false,
+});
 const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false });
+interface Class {
+  name: string;
+  attributes: {
+    type: string;
+    modifier: string;
+    name: string;
+  }[];
+}
+
+interface Association {
+  start: string;
+  end: string;
+  start_m: string;
+  end_m: string;
+  bidir: boolean;
+}
+
+interface DiagramData {
+  classes: Class[];
+  associations: Association[];
+}
 
 type DocumentOrDiagramType = {
   requestType: string;
   doc: string;
-  data: any;
+  data: DiagramData;
 };
 
 type OptionalLoadingType = {
-  loading: boolean
-}
+  loading: boolean;
+};
 
 const extractOnBrackets = (jsonString: string) => {
   let startIndex = 0;
@@ -95,28 +120,64 @@ const MarkdownOrDiagram = ({
   }
 };
 
-const OptionalLoading = ({loading}: OptionalLoadingType) => {
+const OptionalLoading = ({ loading }: OptionalLoadingType) => {
   console.log(loading);
   if (loading) {
     return (
-    <Box pos="absolute" inset="0" bg="bg/80">
-      <Center h="full">
-        <span className="loading loading-dots loading-lg"></span>
-      </Center>
-    </Box> );
+      <Box pos="absolute" inset="0" bg="bg/80">
+        <Center h="full">
+          <span className="loading loading-dots loading-lg"></span>
+        </Center>
+      </Box>
+    );
   } else {
-    return <></>
+    return <></>;
   }
+};
+
+export default function Page() {
+  const { theme } = useTheme();
+  // State to manage the selected programming language
+  const [language, setLanguage] = useState<string>("java");
+  const [code, setCode] = useState<string | undefined>(`class DiagramBox {
+
+    private DiagramData data;
+
+    public DiagramBox(DiagramData data) {
+        this.data = data;
+        drawDiagram(data);
+    }
+
+    public void drawDiagram(data) {}
+    public void clearContents() {}
+
+    public boolean onUpdate(data) {
+        drawDiagram(data);
+    }
 }
 
-export default function page() {
-  const { theme, toggleTheme } = useTheme();
-  // State to manage the selected programming language
-  const [language, setLanguage] = useState<string>("javascript");
-  const [code, setCode] = useState<string | undefined>(
-    "// Start typing your code here..."
-  );
-  const [data, setData] = useState<any>({ classes: [], associations: [] });
+class DiagramData {
+    private List<ClassData> classes;
+    private List<AssociationData> associations;
+}
+
+class ClassData {
+    private String name;
+    private List<AttributeData> attrs;
+}
+
+class AssociationData {
+    private String start;
+    private String end;
+    private int startMult;
+    private int endMult;
+    private bool bidir;
+}
+`);
+  const [data, setData] = useState<DiagramData>({
+    classes: [],
+    associations: [],
+  });
   const [currentMode, setCurrentMode] = useState(modes.DOC);
   const [doc, setDoc] = useState<string>("");
 
@@ -156,7 +217,11 @@ export default function page() {
           </div>
           <div className="w-1/2 p-5">
             <OptionalLoading loading={loading} />
-            <MarkdownOrDiagram requestType={currentMode} doc={doc} data={data} />
+            <MarkdownOrDiagram
+              requestType={currentMode}
+              doc={doc}
+              data={data}
+            />
           </div>
         </div>
         <footer

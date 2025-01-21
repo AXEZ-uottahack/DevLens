@@ -1,5 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
-import { TiArrowSortedDown } from "react-icons/ti";
+import {  Text } from "@chakra-ui/react";
 import {
   MenuContent,
   MenuItem,
@@ -17,7 +16,7 @@ interface LanguageSelectorProps {
 
 const LanguageSelector = ({ language, onSelect }: LanguageSelectorProps) => {
   const languages = Object.entries(LANGUAGE_VERSIONS);
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   // Define colors based on the theme
   const textColor = theme === "dark" ? "white" : "black";

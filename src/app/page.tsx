@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Box, IconButton } from "@chakra-ui/react";
 import { useTheme } from "./context/ThemeContext";
 import Logo from "./components/Logo";

@@ -32,7 +32,7 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
           }
           components={{
             // Render paragraphs with specific styles
-            p: ({ node, ...props }) => (
+            p: ({ ...props }) => (
               <p
                 style={{
                   fontFamily: "Courier New, monospace",
@@ -43,7 +43,7 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
               />
             ),
             // Render h1 headers with specific styles
-            h1: ({ node, ...props }) => (
+            h1: ({ ...props }) => (
               <h1
                 style={{
                   fontFamily: "Georgia, serif",
@@ -55,7 +55,7 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
               />
             ),
             // Render h2 headers with specific styles
-            h2: ({ node, ...props }) => (
+            h2: ({ ...props }) => (
               <h2
                 style={{
                   fontFamily: "Georgia, serif",
@@ -67,15 +67,15 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
               />
             ),
             // Render unordered lists with padding
-            ul: ({ node, ...props }) => (
+            ul: ({ ...props }) => (
               <ul style={{ paddingLeft: "1.5em" }} {...props} />
             ),
             // Render list items with margin
-            li: ({ node, ...props }) => (
+            li: ({ ...props }) => (
               <li style={{ marginBottom: "0.5em" }} {...props} />
             ),
             // Render blockquotes with specific styles
-            blockquote: ({ node, ...props }) => (
+            blockquote: ({ ...props }) => (
               <blockquote
                 style={{
                   borderLeft: "4px solid #ccc",
@@ -87,7 +87,7 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
               />
             ),
             // Render inline code with specific styles
-            code: ({ node, className, ...props }) => {
+            code: ({  className, ...props }) => {
               const isInline = !className;
               return isInline ? (
                 <code
@@ -112,11 +112,11 @@ const DocumentDisplay = ({ markdown }: DocumentDisplayType) => {
             "font-courier " + (theme === "dark" ? "text-white" : "text-black")
           }
         >
-          Write some code in the text editor on the left, and hit analyze!{" "}
+          Press Analyze to generate the documentation or model for the code on the right!{" "}
           <br />
           <br />
           Once analysis is done, the generated documentation will be populated
-          on this paper.
+          on this paper. Feel free to erase the code and analyze with your own code!
         </p> // Render loading message while fetching
       )}
     </div>

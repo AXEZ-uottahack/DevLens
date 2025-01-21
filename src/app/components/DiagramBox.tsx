@@ -1,16 +1,35 @@
 import React, { useEffect, useRef } from "react";
-import { Cell, CircleLayout, Graph, InternalEvent } from "@maxgraph/core";
+import { Cell, Graph, InternalEvent } from "@maxgraph/core";
 import { useTheme } from "../context/ThemeContext";
 
+type Attribute = {
+  modifier: string;
+  name: string;
+  type: string;
+};
+
+type Class = {
+  name: string;
+  attributes: Attribute[];
+};
+
+type Association = {
+  start: string;
+  end: string;
+  bidir: boolean;
+  start_m: string;
+  end_m: string;
+};
+
 type DiagramBoxProps = {
-  classes: any[];
-  associations: any[];
+  classes: Class[];
+  associations: Association[];
 };
 
 const WIDTH_FACTOR = 10;
 const HEIGHT_FACTOR = 20;
 
-const getClassText = (class_name: string, attrs: any[]) => {
+const getClassText = (class_name: string, attrs: Attribute[]) => {
   const lines = [class_name];
   let max_length = class_name.length;
 
@@ -30,7 +49,7 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
   associations,
 }: DiagramBoxProps) => {
   const divGraph = useRef(null);
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   const getClassStyle = () => ({
     baseStyleNames: ["rounded"],
@@ -88,25 +107,22 @@ const DiagramBox: React.FC<DiagramBoxProps> = ({
           const endVertex = class_map.get(associations[i].end);
           let bidir = associations[i].bidir;
           if (sourceVertex && endVertex) {
-            // Handle the case where both vertices exist
-            endVertex.edges.forEach((cell) => {
-              if (cell.getChildVertices().includes(sourceVertex)) {
-                endVertex.removeEdge(cell);
-              }
-            });
-          } else if (endVertex && sourceVertex) {
-            // Extra check for partial validity to ensure TypeScript compliance
-            endVertex.edges.forEach((cell) => {
-              if (cell.getChildVertices().includes(sourceVertex)) {
-                endVertex.removeEdge(cell);
-                bidir = true;
-              }
-            });
-          } else {
-            console.error(
-              `Skipping association: Source or Target vertex is undefined (Source: ${sourceVertex}, Target: ${endVertex})`
-            );
+            if (bidir) {
+              endVertex?.edges.forEach((cell) => {
+                if (cell.getChildVertices().includes(sourceVertex)) {
+                  endVertex.removeEdge(cell);
+                }
+              });
+            } else {
+              endVertex?.edges.forEach((cell) => {
+                if (cell.getChildVertices().includes(sourceVertex)) {
+                  endVertex.removeEdge(cell);
+                  bidir = true;
+                }
+              });
+            }
           }
+          
           graph.insertEdge({
             parent,
             source: sourceVertex,

@@ -1,13 +1,10 @@
 import React from "react";
 import Logo from "./Logo";
 import LanguageSelector from "./LanguageSelector";
-import { ColorModeButton, useColorMode } from "@/components/ui/color-mode";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "../context/ThemeContext";
 import { LuMoon, LuSun } from "react-icons/lu";
-import BedtimeIcon from "@mui/icons-material/Bedtime";
 import { IconButton, Text } from "@chakra-ui/react";
-import SvgIcon from "@mui/icons-material/Bedtime";
 
 import {
   MenuContent,
@@ -16,7 +13,6 @@ import {
   MenuTrigger,
 } from "@/components/ui/menu";
 import { modes } from "../constants/const";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 interface NavbarProps {
